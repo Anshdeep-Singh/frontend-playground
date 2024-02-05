@@ -2,6 +2,43 @@
 import { useEffect, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 
+interface CodeEditorWithLineNumbersProps {
+  language: string;
+  code: string;
+  onChange: (value: string) => void;
+  onKeyUp: () => void;
+}
+
+const CodeEditorWithLineNumbers: React.FC<CodeEditorWithLineNumbersProps> = ({
+  language,
+  code,
+  onChange,
+  onKeyUp,
+}) => {
+  const lines = code.split("\n");
+
+  return (
+    <div className="relative w-full flex">
+      <div className="w-6 bg-gray-800 text-white p-2 text-right select-none mt-2 pt-4">
+        {lines.map((_, index) => (
+          <div key={index} className="text-xs">
+            {index + 1}
+          </div>
+        ))}
+      </div>
+      <textarea
+        name={`${language}-code`}
+        id={`${language}-code`}
+        className="w-full min-h-[250px] px-[5px] py-[15px] bg-gray-900 text-white mt-2 rounded-md text-xs border border-gray-700 focus:outline-none focus:border-blue-500"
+        value={code}
+        onChange={(e) => onChange(e.target.value)}
+        onKeyUp={onKeyUp}
+      ></textarea>
+    </div>
+  );
+};
+
+
 export default function Home() {
   const [htmlCode, setHtmlCode] = useState(`<h1 id="heading" 
   class="text-4xl text-center font-bold mb-2 shadow-lg">
@@ -60,43 +97,37 @@ button{
 
   return (
     <div className="flex flex-col bg-gray-700 h-full py-4 w-full">
-<div className="left px-10 pt-5 w-full flex flex-row">
+<div className="left px-10 pt-4 w-full flex flex-row">
   <div className="w-full mx-2">
     <label className="text-white text-xs shadow-lg rounded-lg bg-gray-800 px-4 py-1 block">HTML</label>
-    <textarea
-      name="html-code"
-      id="html-code"
-      className="w-full min-h-[250px] px-[10px] py-[10px] bg-gray-900 text-white mt-2 rounded-md text-xs border border-gray-700 focus:outline-none focus:border-blue-500"
-      value={htmlCode}
-      onChange={(e) => setHtmlCode(e.target.value)}
-      onKeyUp={() => handleOutput()}
-    ></textarea>
+    <CodeEditorWithLineNumbers
+            language="html"
+            code={htmlCode}
+            onChange={(value) => setHtmlCode(value)}
+            onKeyUp={handleOutput}
+          />
   </div>
   <div className="w-full mx-2">
     <label className="text-white text-xs shadow-lg rounded-lg bg-gray-800 px-4 py-1 block">CSS</label>
-    <textarea
-      name="css-code"
-      id="css-code"
-      className="w-full min-h-[250px] px-[10px] py-[10px] bg-gray-900 text-white mt-2 rounded-md text-xs border border-gray-700 focus:outline-none focus:border-blue-500"
-      value={cssCode}
-      onChange={(e) => setCssCode(e.target.value)}
-      onKeyUp={() => handleOutput()}
-    ></textarea>
+    <CodeEditorWithLineNumbers
+            language="css"
+            code={cssCode}
+            onChange={(value) => setCssCode(value)}
+            onKeyUp={handleOutput}
+          />
   </div>
   <div className="w-full mx-2">
     <label className="text-white text-xs shadow-lg rounded-lg bg-gray-800 px-4 py-1 block">JavaScript</label>
-    <textarea
-      name="js-code"
-      id="js-code"
-      className="w-full min-h-[250px] px-[10px] py-[10px] bg-gray-900 text-white mt-2 rounded-md text-xs border border-gray-700 focus:outline-none focus:border-blue-500"
-      value={jsCode}
-      onChange={(e) => setJsCode(e.target.value)}
-      onKeyUp={() => handleOutput()}
-    ></textarea>
+    <CodeEditorWithLineNumbers
+            language="js"
+            code={jsCode}
+            onChange={(value) => setJsCode(value)}
+            onKeyUp={() => handleOutput()}
+          />
   </div>
 </div>
 
-      <div className="flex flex-col right px-10 w-full">
+      <div className="flex flex-col right px-10 w-full mt-2">
         <label className="text-white text-md shadow-lg rounded-sm bg-gray-800 px-4 py-1 text-center uppercase">Output</label>
         <div id="topbar">
           <div id="icons">
