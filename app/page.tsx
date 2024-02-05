@@ -176,7 +176,7 @@ button{
           <div className="flex flex-row">
             <label className="text-white text-xs shadow-lg rounded-lg bg-gray-800 px-4 py-1 w-1/2">HTML</label>
             <button onClick={handleExport}
-              className="w-full rounded-lg bg-gray-800 text-white px-24 py-1 text-xs shadow-lg ml-2 text-center" 
+              className="w-full rounded-lg bg-gray-800 text-white px-4 py-1 text-xs shadow-lg ml-2 text-center" 
             >
               Export&nbsp;as&nbsp;HTML&nbsp;&darr;
             </button>
