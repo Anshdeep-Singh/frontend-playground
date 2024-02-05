@@ -12,13 +12,15 @@
     "next": "14.1.0",
     "react": "^18",
     "react-autosuggest": "^10.1.0",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-resizable": "^3.0.5"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-autosuggest": "^10.1.11",
     "@types/react-dom": "^18",
+    "@types/react-resizable": "^3.0.7",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",

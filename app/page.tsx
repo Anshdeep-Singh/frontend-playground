@@ -19,17 +19,18 @@ const CodeEditorWithLineNumbers: React.FC<CodeEditorWithLineNumbersProps> = ({
 
   return (
     <div className="relative w-full flex">
-      <div className="w-6 bg-gray-800 text-white p-2 text-right select-none mt-2 pt-4">
+      <div className="w-6 bg-gray-800 text-white p-2 text-right select-none mt-2 pt-4 min-h-[300px]">
         {lines.map((_, index) => (
-          <div key={index} className="text-xs">
+          <p key={index} className="text-xs">
             {index + 1}
-          </div>
+          </p>
         ))}
       </div>
       <textarea
         name={`${language}-code`}
         id={`${language}-code`}
-        className="w-full min-h-[250px] px-[5px] py-[15px] bg-gray-900 text-white mt-2 rounded-md text-xs border border-gray-700 focus:outline-none focus:border-blue-500"
+        className="w-full min-h-[300px] px-[5px] py-[15px] bg-gray-900 text-white mt-2 rounded-md text-xs border border-gray-700 focus:outline-none focus:border-blue-500"
+        style={{ overflow: 'hidden' }}
         value={code}
         onChange={(e) => onChange(e.target.value)}
         onKeyUp={onKeyUp}
@@ -50,7 +51,8 @@ export default function Home() {
   onclick="changeColor(document.getElementById('heading'))" 
   class="bg-red-500 text-white p-2 rounded">
   Click me
-</button>`);
+</button>
+`);
 
   const [cssCode, setCssCode] = useState(`h1{
   color:black;
@@ -69,8 +71,7 @@ button{
   else{
     x.style.background = 'rgb(176, 139, 130)';
   }
-}
-  `);
+}`);
 
   const handleOutput = () => {
     const outputCode = document.getElementById("output") as HTMLIFrameElement | null;
@@ -96,8 +97,8 @@ button{
   }, []);
 
   return (
-    <div className="flex flex-col bg-gray-700 h-full py-4 w-full">
-<div className="left px-10 pt-4 w-full flex flex-row">
+    <div className="flex flex-col bg-gray-700 py-4 w-full">
+<div className="left px-10 pt-4 w-full flex flex-row lg:flex-col">
   <div className="w-full mx-2">
     <label className="text-white text-xs shadow-lg rounded-lg bg-gray-800 px-4 py-1 block">HTML</label>
     <CodeEditorWithLineNumbers
@@ -108,7 +109,7 @@ button{
           />
   </div>
   <div className="w-full mx-2">
-    <label className="text-white text-xs shadow-lg rounded-lg bg-gray-800 px-4 py-1 block">CSS</label>
+    <label className="text-white text-xs shadow-lg rounded-lg bg-gray-800 px-4 py-1 block lg:mt-2">CSS</label>
     <CodeEditorWithLineNumbers
             language="css"
             code={cssCode}
@@ -117,7 +118,7 @@ button{
           />
   </div>
   <div className="w-full mx-2">
-    <label className="text-white text-xs shadow-lg rounded-lg bg-gray-800 px-4 py-1 block">JavaScript</label>
+    <label className="text-white text-xs shadow-lg rounded-lg bg-gray-800 px-4 py-1 block lg:mt-2">JavaScript</label>
     <CodeEditorWithLineNumbers
             language="js"
             code={jsCode}
@@ -127,8 +128,8 @@ button{
   </div>
 </div>
 
-      <div className="flex flex-col right px-10 w-full mt-2">
-        <label className="text-white text-md shadow-lg rounded-sm bg-gray-800 px-4 py-1 text-center uppercase">Output</label>
+      <div className="flex flex-col right px-10 w-full mt-2 mx-2">
+        <label className="text-white text-xs shadow-lg rounded-lg bg-gray-800 px-4 py-1 block text-center">Output</label>
         <div id="topbar">
           <div id="icons">
             <div id="home-icon"></div>
@@ -141,7 +142,7 @@ button{
           </div>
           <div id="close"></div>
         </div>
-        <iframe id="output" className="w-[100%] bg-white p-4 min-h-[250px]">
+        <iframe id="output" className="w-[100%] bg-white p-4 min-h-[750px] md:min-h-[450px]">
         </iframe>
       </div>
     </div>
