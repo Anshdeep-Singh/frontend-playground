@@ -109,10 +109,6 @@ const onChangeJS = useCallback((value: string) => {
     }
   };
 
-  const handleTextColorChange = (newColor: string) => {
-    setTextColor(newColor);
-  };
-
   const handleExport = () => {
     // Combine HTML, CSS, and JS into a single HTML file
     const combinedCode = `<!DOCTYPE html>
@@ -245,7 +241,9 @@ const onChangeJS = useCallback((value: string) => {
           <div id="close"></div>
         </div>
         <iframe id="output" className="w-[100%] bg-white p-4 min-h-[750px] md:min-h-[450px]" 
-        srcDoc={srcCode}>
+        srcDoc={srcCode}
+        sandbox="allow-scripts"
+        >
         </iframe>
       </div>
     </div>
